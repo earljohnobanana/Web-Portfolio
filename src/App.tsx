@@ -259,17 +259,28 @@ function AboutSection() {
             I have built personal projects using technologies such as React, Laravel, and Python, which help me strengthen my understanding of modern web development and software engineering fundamentals.
           </p>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.8 }}>
+
             I'm continuously improving my skills through hands-on projects, certifications, and self-learning, with a focus on problem-solving and building real-world applications.
+
+            I am continuously learning through personal projects and certifications to improve my skills in modern web technologies, software development, and problem-solving.
+          </p>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.8 }}>
+            Currently learning through coursework, certifications, and side projects to improve my skills in modern web development and full-stack development.
+
           </p>
         </div>
 
         <div style={{ opacity: inView ? 1 : 0, transform: inView ? "translateX(0)" : "translateX(32px)", transition: "all 0.8s 0.15s cubic-bezier(0.16,1,0.3,1)" }}>
           {([
             { icon: "⚡", title: "Aspiring Web Developer", desc: "Passionate about building responsive and efficient web applications while continuously improving my development skills." },
+
             { icon: "🤖", title: "Emerging Technologies", desc: "Interested in AI and modern tech trends, with ongoing learning in intelligent systems and APIs." },,
             { icon: "🚀", title: "Project Building", desc: "Developing real-world applications such as dashboards, automation tools, and full-stack web systems." },
             { icon: "🎨", title: "UI Development", desc: "Designing and building responsive user interfaces with attention to usability and user experience." },
             { icon: "📚", title: "Continuous Learning", desc: "Consistently improving skills through personal projects, research, and exploring new web technologies." },
+
+            { icon: "🤖", title: "Emerging Technologies", desc: "nterested in AI and modern tech trends, with ongoing learning in intelligent systems and APIs." },
+            { icon: "🛠️", title: "Programming & Development", desc: "Focused on building full-stack projects while improving code quality, structure, and problem-solving skills."},
           ] as InterestItem[]).map((item, i) => (
             <InterestCard key={i} item={item} />
           ))}
