@@ -510,7 +510,7 @@ function Footer() {
   return (
     <footer style={{ padding: "2rem", background: "#0d1014", borderTop: "1px solid rgba(255,255,255,0.05)", textAlign: "center" }}>
       <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.25)", margin: 0 }}>
-        © 2025 Alex Reyes · Built with React & precision ✦
+        © 2025 Earl John Obañana · Built with React & precision ✦
       </p>
     </footer>
   );
