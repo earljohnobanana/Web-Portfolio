@@ -256,15 +256,18 @@ function AboutSection() {
             I'm a Computer Engineering student and developer passionate about building applications for the web. I focus on full-stack development, API design, and integrating AI into practical solutions.
           </p>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.8 }}>
-            Currently interning and building side projects that push the boundaries of what's possible with modern web technologies and machine learning.
+            I am continuously learning through personal projects and certifications to improve my skills in modern web technologies, software development, and problem-solving.
+          </p>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.8 }}>
+            Currently learning through coursework, certifications, and side projects to improve my skills in modern web development and full-stack development.
           </p>
         </div>
 
         <div style={{ opacity: inView ? 1 : 0, transform: inView ? "translateX(0)" : "translateX(32px)", transition: "all 0.8s 0.15s cubic-bezier(0.16,1,0.3,1)" }}>
           {([
-            { icon: "⚡", title: "Web Development", desc: "Developing scalable and efficient web applications with a focus on performance and maintainability." },
-            { icon: "🤖", title: "Artificial Intelligence", desc: "Integrating LLMs and ML models into practical, user-facing products." },
-            { icon: "🛠️", title: "Software Engineering", desc: "Clean code, system design, and engineering best practices at every layer." },
+            { icon: "⚡", title: "Aspiring Web Developer", desc: "Passionate about building responsive and efficient web applications while continuously improving my development skills." },
+            { icon: "🤖", title: "Emerging Technologies", desc: "nterested in AI and modern tech trends, with ongoing learning in intelligent systems and APIs." },
+            { icon: "🛠️", title: "Programming & Development", desc: "Focused on building full-stack projects while improving code quality, structure, and problem-solving skills."},
           ] as InterestItem[]).map((item, i) => (
             <InterestCard key={i} item={item} />
           ))}
