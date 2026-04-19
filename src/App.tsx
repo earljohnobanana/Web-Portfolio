@@ -1,8 +1,28 @@
 import { useState, useEffect, useRef } from "react";
+import type { ReactNode } from "react";
 
 const NAV_LINKS = ["Home", "About", "Projects", "Skills", "Contact"];
 
-const PROJECTS = [
+interface Project {
+  title: string;
+  desc: string;
+  tags: string[];
+  github: string;
+  color: string;
+}
+
+interface Skill {
+  name: string;
+  level: number;
+}
+
+interface InterestItem {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+const PROJECTS: Project[] = [
   {
     title: "AI Stethoscope",
     desc: "An AI-powered stethoscope system designed to assist in heart and lung sound analysis.",
@@ -26,8 +46,8 @@ const PROJECTS = [
   },
   {
     title: "File-Organizer",
-    desc: "A Python application that organizes files in a folder into subfolders automatically",
-    tags: ["Python", "FastAPI",],
+    desc: "A Python application that organizes files in a folder into subfolders automatically.",
+    tags: ["Python", "FastAPI"],
     github: "https://github.com",
     color: "#ff6b6b",
   },
@@ -40,14 +60,14 @@ const PROJECTS = [
   },
   {
     title: "TaskManager",
-    desc: "A full-stack To-Do List app using Laravel, React, and Inertia.js. Users can add, edit, delete, and mark tasks as completed. ",
+    desc: "A full-stack To-Do List app using Laravel, React, and Inertia.js. Users can add, edit, delete, and mark tasks as completed.",
     tags: ["React", "HTML", "Inertia.js", "Laravel"],
     github: "https://github.com/earljohnobanana/TaskManager.git",
     color: "#7c83fd",
   },
 ];
 
-const SKILLS = {
+const SKILLS: Record<string, Skill[]> = {
   Frontend: [
     { name: "React", level: 45 },
     { name: "TypeScript", level: 35 },
@@ -68,8 +88,8 @@ const SKILLS = {
   ],
 };
 
-function useInView(threshold = 0.15) {
-  const ref = useRef(null);
+function useInView(threshold = 0.15): [React.RefObject<HTMLElement | null>, boolean] {
+  const ref = useRef<HTMLElement | null>(null);
   const [inView, setInView] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -84,7 +104,7 @@ function useInView(threshold = 0.15) {
   return [ref, inView];
 }
 
-function Navbar({ active }) {
+function Navbar({ active }: { active: string }) {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 40);
@@ -114,8 +134,8 @@ function Navbar({ active }) {
                 textDecoration: "none", transition: "color 0.25s",
                 letterSpacing: "0.02em",
               }}
-              onMouseEnter={e => e.target.style.color = "#fff"}
-              onMouseLeave={e => e.target.style.color = active === link.toLowerCase() ? "#4ecca3" : "rgba(255,255,255,0.55)"}
+              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = "#fff"}
+              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = active === link.toLowerCase() ? "#4ecca3" : "rgba(255,255,255,0.55)"}
             >{link}</a>
           ))}
         </div>
@@ -134,7 +154,6 @@ function HeroSection() {
       position: "relative", overflow: "hidden",
       background: "linear-gradient(135deg, #0f1115 0%, #12151b 50%, #0f1115 100%)",
     }}>
-      {/* Ambient orbs */}
       <div style={{
         position: "absolute", width: 600, height: 600, borderRadius: "50%",
         background: "radial-gradient(circle, rgba(78,204,163,0.07) 0%, transparent 70%)",
@@ -145,8 +164,6 @@ function HeroSection() {
         background: "radial-gradient(circle, rgba(124,131,253,0.06) 0%, transparent 70%)",
         bottom: "10%", right: "5%", pointerEvents: "none",
       }} />
-
-      {/* Grid pattern */}
       <div style={{
         position: "absolute", inset: 0, opacity: 0.03,
         backgroundImage: "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
@@ -198,24 +215,22 @@ function HeroSection() {
           display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap",
           opacity: mounted ? 1 : 0, transition: "all 0.9s 0.3s ease",
         }}>
-          <CTAButton href="#projects" primary>View Projects</CTAButton>
-          <CTAButton href="#contact">Contact Me</CTAButton>
+          <CTAButton href="#projects" primary={true}>View Projects</CTAButton>
+          <CTAButton href="#contact" primary={false}>Contact Me</CTAButton>
         </div>
       </div>
     </section>
   );
 }
 
-function CTAButton({ href, primary, children }) {
+function CTAButton({ href, primary, children }: { href: string; primary: boolean; children: ReactNode }) {
   const [hover, setHover] = useState(false);
   return (
     <a href={href} style={{
       fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 15,
       padding: "13px 30px", borderRadius: 12, textDecoration: "none",
       display: "inline-block", transition: "all 0.3s ease", letterSpacing: "0.01em",
-      background: primary
-        ? hover ? "#3db88f" : "#4ecca3"
-        : "transparent",
+      background: primary ? (hover ? "#3db88f" : "#4ecca3") : "transparent",
       color: primary ? "#0f1115" : hover ? "#fff" : "rgba(255,255,255,0.65)",
       border: primary ? "none" : "1px solid rgba(255,255,255,0.15)",
       transform: hover ? "translateY(-2px)" : "translateY(0)",
@@ -230,30 +245,28 @@ function CTAButton({ href, primary, children }) {
 function AboutSection() {
   const [ref, inView] = useInView();
   return (
-    <section id="about" ref={ref} style={{ padding: "8rem 2rem", background: "#12151b" }}>
+    <section id="about" ref={ref as React.RefObject<HTMLElement | null>} style={{ padding: "8rem 2rem", background: "#12151b" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
-        {/* Left */}
         <div style={{ opacity: inView ? 1 : 0, transform: inView ? "translateX(0)" : "translateX(-32px)", transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)" }}>
           <Label>About Me</Label>
           <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: "#fff", margin: "1rem 0 1.5rem", lineHeight: 1.15, letterSpacing: "-1px" }}>
             Building with code, driven by purpose
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.8, marginBottom: "1.25rem" }}>
-           I’m a Computer Engineering student and developer passionate about building applications for the web. I focus on full-stack development, API design, and integrating AI into practical solutions.
+            I'm a Computer Engineering student and developer passionate about building applications for the web. I focus on full-stack development, API design, and integrating AI into practical solutions.
           </p>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.8 }}>
             Currently interning and building side projects that push the boundaries of what's possible with modern web technologies and machine learning.
           </p>
         </div>
 
-        {/* Right */}
         <div style={{ opacity: inView ? 1 : 0, transform: inView ? "translateX(0)" : "translateX(32px)", transition: "all 0.8s 0.15s cubic-bezier(0.16,1,0.3,1)" }}>
-          {[
+          {([
             { icon: "⚡", title: "Web Development", desc: "Developing scalable and efficient web applications with a focus on performance and maintainability." },
             { icon: "🤖", title: "Artificial Intelligence", desc: "Integrating LLMs and ML models into practical, user-facing products." },
             { icon: "🛠️", title: "Software Engineering", desc: "Clean code, system design, and engineering best practices at every layer." },
-          ].map((item, i) => (
-            <InterestCard key={i} item={item} delay={i * 0.1} />
+          ] as InterestItem[]).map((item, i) => (
+            <InterestCard key={i} item={item} />
           ))}
         </div>
       </div>
@@ -261,7 +274,7 @@ function AboutSection() {
   );
 }
 
-function InterestCard({ item, delay }) {
+function InterestCard({ item }: { item: InterestItem }) {
   const [hover, setHover] = useState(false);
   return (
     <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
@@ -285,7 +298,7 @@ function InterestCard({ item, delay }) {
 function ProjectsSection() {
   const [ref, inView] = useInView(0.05);
   return (
-    <section id="projects" ref={ref} style={{ padding: "8rem 2rem", background: "#0f1115" }}>
+    <section id="projects" ref={ref as React.RefObject<HTMLElement | null>} style={{ padding: "8rem 2rem", background: "#0f1115" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <Label>Projects</Label>
@@ -296,9 +309,7 @@ function ProjectsSection() {
             A selection of projects spanning web apps, APIs, and AI-powered tools.
           </p>
         </div>
-        <div style={{
-          display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "1.5rem",
-        }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "1.5rem" }}>
           {PROJECTS.map((project, i) => (
             <ProjectCard key={i} project={project} i={i} inView={inView} />
           ))}
@@ -308,7 +319,7 @@ function ProjectsSection() {
   );
 }
 
-function ProjectCard({ project, i, inView }) {
+function ProjectCard({ project, i, inView }: { project: Project; i: number; inView: boolean }) {
   const [hover, setHover] = useState(false);
   return (
     <div
@@ -319,9 +330,7 @@ function ProjectCard({ project, i, inView }) {
         border: `1px solid ${hover ? project.color + "40" : "rgba(255,255,255,0.06)"}`,
         borderRadius: 20, padding: "1.75rem",
         transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
-        transform: inView
-          ? hover ? "translateY(-10px)" : "translateY(0)"
-          : "translateY(32px)",
+        transform: inView ? (hover ? "translateY(-10px)" : "translateY(0)") : "translateY(32px)",
         opacity: inView ? 1 : 0,
         transitionDelay: inView ? `${i * 0.07}s` : "0s",
         boxShadow: hover ? `0 20px 60px rgba(0,0,0,0.3), 0 0 0 1px ${project.color}30` : "none",
@@ -341,7 +350,7 @@ function ProjectCard({ project, i, inView }) {
       <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.7, margin: "0 0 1.25rem", flex: 1 }}>{project.desc}</p>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.25rem" }}>
-        {project.tags.map(tag => (
+        {project.tags.map((tag: string) => (
           <span key={tag} style={{
             fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 500,
             padding: "4px 10px", borderRadius: 6,
@@ -366,7 +375,7 @@ function ProjectCard({ project, i, inView }) {
 function SkillsSection() {
   const [ref, inView] = useInView();
   return (
-    <section id="skills" ref={ref} style={{ padding: "8rem 2rem", background: "#12151b" }}>
+    <section id="skills" ref={ref as React.RefObject<HTMLElement | null>} style={{ padding: "8rem 2rem", background: "#12151b" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <Label>Skills</Label>
@@ -396,8 +405,8 @@ function SkillsSection() {
   );
 }
 
-function SkillBar({ skill, inView, delay }) {
-  const colors = { 90: "#4ecca3", 80: "#7c83fd", 70: "#f7b731", 60: "#ff6b6b" };
+function SkillBar({ skill, inView, delay }: { skill: Skill; inView: boolean; delay: number }) {
+  const colors: Record<number, string> = { 90: "#4ecca3", 80: "#7c83fd", 70: "#f7b731", 60: "#ff6b6b" };
   const color = Object.entries(colors).reverse().find(([lvl]) => skill.level >= Number(lvl))?.[1] || "#4ecca3";
   return (
     <div style={{ marginBottom: "1.1rem" }}>
@@ -416,6 +425,16 @@ function SkillBar({ skill, inView, delay }) {
   );
 }
 
+interface ContactCardProps {
+  href: string;
+  icon: string;
+  label: string;
+  value: string;
+  color: string;
+  hover: boolean;
+  setHover: (v: boolean) => void;
+}
+
 function ContactSection() {
   const [ref, inView] = useInView();
   const [hover1, setHover1] = useState(false);
@@ -424,54 +443,22 @@ function ContactSection() {
   const [hover4, setHover4] = useState(false);
 
   return (
-    <section id="contact" ref={ref} style={{ padding: "8rem 2rem", background: "#0f1115" }}>
+    <section id="contact" ref={ref as React.RefObject<HTMLElement | null>} style={{ padding: "8rem 2rem", background: "#0f1115" }}>
       <div style={{ maxWidth: 680, margin: "0 auto", textAlign: "center" }}>
         <div style={{ opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(28px)", transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)" }}>
           <Label>Contact</Label>
           <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: "#fff", margin: "1rem 0 1.25rem", letterSpacing: "-1px" }}>
             Let's Work Together
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.45)", lineHeight: 1.8, marginBottom: "3rem", maxWidth: 480, margin: "0 auto 3rem" }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: "rgba(255,255,255,0.45)", lineHeight: 1.8, maxWidth: 480, margin: "0 auto 3rem" }}>
             I'm open to freelance projects, internships, and full-time opportunities. Drop me a message and I'll get back to you within 24 hours.
           </p>
 
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <ContactCard
-              href="mailto:earlj4541@gmail.com"
-              icon="✉️"
-              label="Email"
-              value="earlj4541@gmail.com"
-              color="#4ecca3"
-              hover={hover1}
-              setHover={setHover1}
-            />
-            <ContactCard
-              href="https://github.com/earljohnobanana"
-              icon="⬡"
-              label="GitHub"
-              value="github.com/earljohnobanana"
-              color="#7c83fd"
-              hover={hover2}
-              setHover={setHover2}
-            />
-            <ContactCard
-              href="tel:+639564139075"
-              icon="📱"
-              label="Phone"
-              value="+63 956 413 9075"
-              color="#22c55e"
-              hover={hover3}
-              setHover={setHover3}
-            />
-            <ContactCard
-              href="https://www.linkedin.com/in/earl-john-oba%C3%B1ana-6426163a9/"
-              icon="💼"
-              label="LinkedIn"
-              value="linkedin.com/in/earl-john-obañana"
-              color="#0a66c2"
-              hover={hover4}
-              setHover={setHover4}
-/>
+            <ContactCard href="mailto:earlj4541@gmail.com" icon="✉️" label="Email" value="earlj4541@gmail.com" color="#4ecca3" hover={hover1} setHover={setHover1} />
+            <ContactCard href="https://github.com/earljohnobanana" icon="⬡" label="GitHub" value="github.com/earljohnobanana" color="#7c83fd" hover={hover2} setHover={setHover2} />
+            <ContactCard href="tel:+639564139075" icon="📱" label="Phone" value="+63 956 413 9075" color="#22c55e" hover={hover3} setHover={setHover3} />
+            <ContactCard href="https://www.linkedin.com/in/earl-john-oba%C3%B1ana-6426163a9/" icon="💼" label="LinkedIn" value="linkedin.com/in/earl-john-obañana" color="#0a66c2" hover={hover4} setHover={setHover4} />
           </div>
 
           <div style={{ marginTop: "3.5rem", padding: "2.5rem", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 20 }}>
@@ -486,7 +473,7 @@ function ContactSection() {
   );
 }
 
-function ContactCard({ href, icon, label, value, color, hover, setHover }) {
+function ContactCard({ href, icon, label, value, color, hover, setHover }: ContactCardProps) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer"
       onMouseEnter={() => setHover(true)}
@@ -516,10 +503,12 @@ function Footer() {
   );
 }
 
-function Label({ children }) {
+function Label({ children }: { children: ReactNode }) {
   return (
     <div style={{ display: "inline-block", padding: "5px 14px", borderRadius: 100, background: "rgba(78,204,163,0.08)", border: "1px solid rgba(78,204,163,0.2)" }}>
-      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "#4ecca3", letterSpacing: "0.1em", fontWeight: 600 }}>{children.toUpperCase()}</span>
+      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "#4ecca3", letterSpacing: "0.1em", fontWeight: 600 }}>
+        {typeof children === "string" ? children.toUpperCase() : children}
+      </span>
     </div>
   );
 }
@@ -529,7 +518,7 @@ export default function App() {
   useEffect(() => {
     const h = () => {
       const sections = NAV_LINKS.map(l => l.toLowerCase());
-      for (let s of [...sections].reverse()) {
+      for (const s of [...sections].reverse()) {
         const el = document.getElementById(s);
         if (el && window.scrollY >= el.offsetTop - 120) { setActive(s); break; }
       }
