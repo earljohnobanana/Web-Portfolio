@@ -1,73 +1,141 @@
-# React + TypeScript + Vite
+# 🌐 Earl John Obañana – Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive web portfolio showcasing my projects, skills, and experience as a Computer Engineering student and aspiring full-stack developer.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 About the Project
 
-## React Compiler
+This portfolio is designed to highlight my work in **web development, backend systems, and AI-powered applications**. It features a clean UI, smooth animations, and a structured layout to provide a great user experience.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* ⚡ Modern UI with smooth animations and transitions
+* 📱 Fully responsive design (mobile-friendly)
+* 🧠 Project showcase with tech stacks
+* 📊 Skill visualization with animated progress bars
+* 📬 Contact section with direct links (Email, GitHub, LinkedIn, Phone)
+* 🎯 Scroll-based navigation with active section tracking
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Frontend
+
+* React (Vite)
+* TypeScript
+* HTML & CSS
+
+### Backend / Concepts
+
+* Python
+* Laravel
+* FastAPI
+* REST APIs
+
+### Tools
+
+* Git & GitHub
+* VS Code
+
+---
+
+## 📂 Projects Included
+
+### 🩺 AI Stethoscope
+
+AI-powered system for analyzing heart and lung sounds.
+**Tech:** React, Python, OpenAI API, Datasets
+
+### ☁️ CloudVault
+
+Responsive cloud storage dashboard UI.
+**Tech:** HTML, CSS, JavaScript
+
+### 📊 FlowDesk
+
+Interactive project management dashboard.
+**Tech:** HTML, CSS, JavaScript
+
+### 📁 File Organizer
+
+Python tool to automatically organize files into folders.
+**Tech:** Python, FastAPI
+
+### 🌦️ Weather Prediction
+
+Machine learning system for forecasting weather.
+**Tech:** Python, AI, Datasets
+
+### ✅ Task Manager
+
+Full-stack CRUD app with task tracking features.
+**Tech:** Laravel, React, Inertia.js
+
+---
+
+## 📸 Preview
+
+> Add a screenshot here (recommended)
+
+```
+/public/preview.png
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Installation & Setup
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/your-portfolio.git
+cd your-portfolio
 ```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## 📬 Contact
+
+* 📧 Email: [earlj4541@gmail.com](mailto:earlj4541@gmail.com)
+* 🐙 GitHub: https://github.com/earljohnobanana
+* 💼 LinkedIn: https://www.linkedin.com/in/earl-john-oba%C3%B1ana-6426163a9/
+* 📱 Phone: +63 956 413 9075
+
+---
+
+## 📈 Future Improvements
+
+* Add dark/light theme toggle
+* Improve animations using Framer Motion
+* Add blog or case study section
+* Deploy with custom domain
+
+---
+
+## 📄 License
+
+This project is open-source and available under the MIT License.
+
+---
+
+## 🙌 Acknowledgment
+
+Built with passion for learning, growth, and creating real-world applications.
+
+---
