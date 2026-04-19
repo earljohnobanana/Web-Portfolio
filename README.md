@@ -79,7 +79,7 @@ Full-stack CRUD app with task tracking features.
 
 ## 📸 Preview
 
-> Add a screenshot here (recommended)
+> Add a screenshot here
 
 ```
 /public/preview.png
